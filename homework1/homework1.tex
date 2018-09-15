@@ -1,0 +1,418 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+%\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center header
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Homework\ \#1} % Assignment title
+\newcommand{\hmwkDueDate}{Sunday,\ August\ 28,\ 2016} % Due date
+\newcommand{\hmwkClass}{CSC\ 591} % Course/class
+%\newcommand{\hmwkClassTime}{10:30am} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Samatova} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Charles Haithcock (cehaith2)} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+%\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 1
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkProblem}[Problem \#\arabic{homeworkProblemCounter}]
+A customer asks you to provide the most efficient implementation of the following operations 
+over a large graph (about 10,000 vertices): add/delete edges/vertices.
+
+    \begin{homeworkSection}{1.}
+        What questions would you ask the customer that will help you to make the right decision
+        about the customer's request? [Hints: Check the types of graphs]\\
+        \problemAnswer{
+            \begin{itemize}
+                \item What exaclty is being optimized? Space or time? 
+                \item How often will these operations occur?
+                \item Is the graph Directed or undirected? 
+                \item Is the graph cyclic or acyclic?
+                \item Do edges contain data such as weight or labels? If so, what?
+                \item Do vertices contain data such as weight or labels? If so, what?
+                \item Is the graph simple or a hyper graph? 
+                \item Is the graph dense or sparse? 
+                \item Is the graph unipartite, bipartite, or multipartite? 
+                \item Do nodes have self-loops?
+                \item Is the graph static or dynamic? 
+                \item Is the graph complete, just connected, or disconnected?
+                \item Are general statistics about the graph known, such as mean and standard
+                    deviation of degrees of the nodes and anything else? If so, what are they? 
+            \end{itemize}
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{2.}
+        Provide three scenarios depending on the answers to those questions.\\
+        \problemAnswer{
+            \begin{enumerate}
+                \item Let's start simple; in the first scenario, the graph is simple, undirected,
+                    connected, acyclic graph with no loops (in other words a tree), and static. 
+                    The data stored in the nodes is quite large so only 1 node can fit in memory at 
+                    a time plus roughly 200 KiB for any additional space needed to help index this 
+                    and any other nodes. Here, due to the immensity of the data, we optimize for 
+                    time when the operations occur. A startup penalty to time is acceptable for 
+                    caching. Any node will have a degree anywhere between $0$ and $2$. This tree is 
+                    also balanced. Nodes are stored on disk in a single binary file.\\
+                \item In the second scenario, the graph is also simple, but is directed, cyclic,
+                    sparse, multipartite, contains no self-loops, is quite dynamic, disconnected, 
+                    but data points can all be stored in memory easily with plenty of space left 
+                    where additional data can be stored for data points. Here we want speed but
+                    space has no price. The average degree for the nodes is roughtly $1.2$ with 
+                    low variance. Any pair of vertices has at most 1 edge. \\
+                \item In the final scenario, the graph is dense and complete (therefore also 
+                    cyclic and multi partite), simple, contains self-loops, is directed, and can 
+                    be dynamic though this is highly regular and predictable. Also at most one edge
+                    exists between any two nodes in the graph. We want both speed and space 
+                    efficiency. The completeness also implies the degree of any node is $N-1$ with
+                    no variance. \\
+            \end{enumerate}
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{3.}
+        For each scenario, propose the most efficient data structure and supply the time 
+        complexity of the requested operations in terms of bigO. What is the space requirement
+        for the selected data structure?
+        \problemAnswer{
+                    \iffalse
+            \begin{enumerate}
+                \item For the first scenario, since we are dealing with a binary tree, an 
+                    efficient implementation would be an array representation where any node,
+                    \texttt{n} in the graph located at \texttt{array[n]} would have children (if any 
+                    existed for \texttt{n} at \texttt{array[2n]} for the left child and 
+                    \texttt{array[2n + 1]} for the right child. Since space is so limited, and 
+                    since only one node can fit in memory at a time, we will on startup read
+                    through the binary file to read in the offsets of the nodes and node unique keys
+                    and cache their addresses (or offsets from the start of the file) and their
+                    keys so that \texttt{array[n] = (key,addr)} where \texttt{addr} is the address, 
+                    or offset from the start of the file in bytes, of node \texttt{n} while 
+                    \texttt{key} is a unique key for the nodes we query with. This array will be
+                    used to index the tree to find nodes efficiently without going to disk.\\
+                    \textbf{Data Structure} Binary tree indexing the actual graph/tree implemented
+                                            as an array.\\
+                    \textbf{Time complexity} Adding an edge in this scenario implies also adding a
+                                             vertex due to the acyclic nature and limitations on 
+                                             degree of nodes. As such they are the same of 
+                                             $O(\log n)$. If, over time, nodes are added, this 
+                                             complexity could vary from $O(\log n)$ to $O(n)$ should
+                                             insertions to the tree cause it to become unbalanced.
+                                             Deletion of an edge also implies the deletion of a 
+                                             vertex and is also $O(\log n)$ on average and could 
+                                             degrade into $O(n)$ if the graph ends up changing
+                                             and becoming unbalanced. \\
+                    \textbf{Space requirements} Without knowing how large the binary file is, the 
+                                             address will need to be stored as an 
+                                             \texttt{unsigned long long} for same measure.
+                                             Likewise, the unique keys will also need to be
+                                             stored as such for similar reasons. On a typical
+                                             \texttt{x86\_64} system, \texttt{unsigned long long}
+                                             is typically stored as $8$ Bytes. With a graph of 
+                                             $10,000$ nodes, the index would then consume 
+                                             $10,000 \times 8 \times 2$ Bytes or roughly $156.25$
+                                             KiB. \\
+
+                \item For the second scenario, since the graph is sparse and the focus is on 
+                    optimizing speed, an optimal implementation is with an adjacency list created
+                    via doubly linked circular lists. The doubly linked circular characteristics
+                    is to allow the cursor to stay on the last quiried node. This will attempt to 
+                    take advantage of temporal and spatial locality.\\
+                    \textbf{Data Structure}
+                        An adjacency list where each list and sublist are doubly linked circular 
+                        lists. Since space is of no concern, nodes will contain the typical doubly
+                        circular linked list properties, but will also contain a count for degree.
+                        The "main" list is a list of the nodes with pointers to the contained data.
+                        The sublists are a listing of nodes with pointers to the nodes in the "main"
+                        list wherein a node in the sublist indicates an edge between the two 
+                        vertices represented by the main node and the pointed to node. The main node
+                        would be the "from" direction of the edge while the pointed-to node is the 
+                        "to" direction of the edge. \\
+                    \textbf{Time Complexity
+                         Add node: 
+                             Since order does not matter explicitly within vertices or edges in the 
+                             implementation, nodes can be added at any location within the main list
+                             of nodes. As such, only adding the node to the list should be $O(1)$ or
+                             constant time. \\
+                         Remove node:
+                             Within the implementation, we can assume a node can only be removed
+                             only when the degree of that node is 0. A node can be manually removed
+                             but this would require first removing all vertices, the analysis of
+                             which is later. As such, node removal is limited to removing the node
+                             from the main node list. The worst case scenario is the index to this
+                             list points to a node opposite of where the desired node would be 
+                             meaning worst case scenario of $O(n)$ with a best case scenario of 
+                             $O(1)$ when the index is already pointing to the desired node. \\
+                         Add vertex: 
+                             Adding a vertex means first traversing to the nodes in questions, but,
+                             similar to adding a node, since order of the node and vertex siblings
+                             do not matter, the vertex can be added into any location in the vertex
+                             list for the node. So traversing the node list in worst case scenario 
+                             $O(\frac{n}{2} + \frac{n}{2})$ or $O(n)$ whereas, in the event the
+                             nodes are right next to each other, the traversal is then $O(1 + 1)$ or
+                             $O(1)$. Adding the vertex into the lists however in all scenarios is 
+                             $O(1 + 1)$ or $O(1)$. The total complexity is 
+                             $O(\frac{n}{2} + \frac{n}{2} + 1 + 1)$ or $O(n)$. \\
+                         Remove vertex:
+                             Since the graph is simple, no vertex will have more than $2$ nodes 
+                             associated with it. As such, similar to adding a vertex, the node 
+                             list must be travesed for each meaning this operation is $O(n)$ in
+                             the worst case scenario and $O(1)$ in best case scenario. However, 
+                             removing a vertex means traversing both lists of vertecies for the 
+                             nodes. The worst case scenario then becomes 
+                             $O(max_degree(G) + max_degree(G))$. The best case however is when the index is already
+                             pointing to the vertecies, so, similar to removing nodes, this becomes
+                             $O(1)$.  \\
+                    \textbf{Space Requirements}
+                        The adjacency list would need a "main" node list each with a list of
+                        vertices. Below are basic mockups for the structure of the nodes;
+                        \begin{lstlisting}[language=C++]
+                            struct vertex_node {
+                                struct *vertex_node prev;
+                                struct *vertex_node next;
+                                void *data;
+                                unsigned int degree;
+                            }
+
+                            struct edge_node {
+                                struct *edge_node prev;
+                                struct *edge_node next;
+                                struct *vertex_node;
+                            }
+                        \end{lstlisting}
+                     \\
+            \end{enumerate}
+                     \fi
+            
+        }
+    \end{homeworkSection}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 2
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Problem \#\arabic{homeworkProblemCounter}]
+Let $G$ be a simple directed graph with $N$ nodes. The path matrix of $G$ is the $n$-­square matrix
+$P$ defined as follows: Each $(i,j)$ element of the matrix is $1$ if there is a path from node $i$
+to node $j$ in $G$.
+
+%--------------------------------------------
+
+    \begin{homeworkSection}{1.} % Section within problem
+        Using only an adjacency matrix $A$ of graph $G$ defined as a boolean $(0,1)$ matrix, design
+        an algorithm that constructs the matrix $P$ in the most efficient manner. Write any
+        mathematical relationship for $P$ you will use for your algorithm and justify this relationship
+        (formal or informal proof is up to you). [Hint: What is $A$ times $A$? What is $A$ times $A$ times
+        $A$ ?]\\
+        \vspace{10pt} % Question
+        \problemAnswer{
+            MEH I HATE X11
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{2.} % Section within problem
+        Provide a pseudo­code of the algorithm.
+        \vspace{10pt} % Question
+        \problemAnswer{
+            MEH I HATE X11
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{3.} % Section within problem
+        Analyse the time complexity of your algorithm in terms of big­O.
+        \vspace{10pt} % Question
+        \problemAnswer{
+            MEH I HATE X11
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{4.} % Section within problem
+        Define the values of N, for which this algorithm becomes impractical (e.g., will take more
+        than a day to get an answer) on my laptop running at $2.5$ GHz (i.e., $2.4 * 10^9$ floating
+        point operations per second).
+        \vspace{10pt} % Question
+        \problemAnswer{
+            MEH I HATE X11
+        }
+    \end{homeworkSection}
+
+    \begin{homeworkSection}{4.} % Section within problem
+        If my laptop has 512 MB, 1GB, or 16 GB of RAM, will your answer to (4) change given
+        my memory constraints (i.e., in terms of big­O for space requirements) and how many
+        bytes do you require per your selected data structure; crude estimation with the
+        justification is enough?
+        \vspace{10pt} % Question
+        \problemAnswer{
+            MEH I HATE X11
+        }
+    \end{homeworkSection}
+\end{homeworkProblem}
+
+%--------------------------------------------
+
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 3
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Prob. \Roman{homeworkProblemCounter}] % Roman numerals
+
+%--------------------------------------------
+
+\begin{homeworkSection}{\homeworkProblemName:~(a)} % Using the problem name elsewhere
+\problemAnswer{ % Answer
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\begin{homeworkSection}{\homeworkProblemName:~(b)}
+\vspace{10pt} % Question
+
+\problemAnswer{ % Answer
+}
+\end{homeworkSection}
+
+%--------------------------------------------
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	PROBLEM 4
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[Prob. \Roman{homeworkProblemCounter}] % Roman numerals
+\problemAnswer{ % Answer
+}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

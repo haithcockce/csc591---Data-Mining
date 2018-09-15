@@ -1,0 +1,13 @@
+get_ipython().magic(u'logstart "~/591/homework0-python/section4.log" append')
+from pyspark.sql import SQLContext
+sqlcontext = SQLContext(sc)
+df = sqlContext.read.json('/opt/spark-1.6.2-bin-hadoop2.6/examples/src/main/resources/people.json')
+df.show()
+df.printSchema()
+df.select("name").show()
+df.select(df['name'], df['age'] + 1).show()
+df.filter(df['age'] > 21).show()
+df.groupBy("age").count().show()
+df = sqlContext.sql("SELECT * FROM table")
+df = sqlContext.sql("SELECT * FROM df")
+get_ipython().magic(u'logstop')
